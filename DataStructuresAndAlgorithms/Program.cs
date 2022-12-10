@@ -9,34 +9,37 @@ namespace DataStructuresAndAlgorithms
 {
     internal class Program
     {
-        static int binarySearch(String[] arr, String x)
+        static int[] InsertionSort(int[] inputArray)
         {
-            int l = 0, r = arr.Length - 1;
-            while (l <= r)
+            for (int i = 0; i < inputArray.Length - 1; i++)
             {
-                int m = l + (r - l) / 2;
-
-                int res = x.CompareTo(arr[m]);
-                if (res == 0)
-                    return m;
-                if (res > 0)
-                    l = m + 1;
-                else
-                    r = m - 1;
+                for (int j = i + 1; j > 0; j--)
+                {
+                    if (inputArray[j - 1] > inputArray[j])
+                    {
+                        int temp = inputArray[j - 1];
+                        inputArray[j - 1] = inputArray[j];
+                        inputArray[j] = temp;
+                    }
+                }
             }
-            return -1;
+            return inputArray;
+        }
+        public static void PrintArray(int[] array)
+        {
+            foreach (int i in array)
+            {
+                Console.Write(i.ToString() + "  ");
+            }
         }
         static void Main(string[] args)
         {
-            String[] arr = { "Ab", "cd", "ef", "gh" };
-            Console.WriteLine("Enter the word you want to search");
-            String x = Convert.ToString(Console.ReadLine());
-            int result = binarySearch(arr, x);
-            if (result == -1)
-                Console.WriteLine("Element not present");
-            else
-                Console.WriteLine("Element found at "
-                                + "index " + result);
+            int[] numberList = new int[] { 34, 67, 53, 74, 84, 12, 9 };
+            Console.WriteLine("Unsorted(Initial) Array is:");
+            PrintArray(numberList);
+            InsertionSort(numberList);
+            Console.WriteLine("Sorted array after insertion sort is :");
+            PrintArray(numberList);
 
         }
     }
